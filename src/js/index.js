@@ -10,6 +10,24 @@
 const $ = (selector) => document.querySelector(selector);
 
 function App() {
+  // TODO 메뉴 수정
+  // - [V] 메뉴의 수정 버튼을 누르면 prompt 창이 뜬다.
+  // - [V] prompt 창에서 수정할 메뉴명을 입력 받고, 확인 버튼을 누르면 메뉴가 수정된다.
+  $("#espresso-menu-list").addEventListener("click", (e) => {
+    if (e.target.classList.contains("menu-edit-button")) {
+      const $menuName = e.target.closest("li").querySelector(".menu-name");
+      const newMenuName = prompt(
+        "수정할 메뉴명을 입력해주세요.",
+        $menuName.innerText
+      );
+      if (newMenuName === "") {
+        alert("값을 입력해주세요.");
+        return;
+      }
+      $menuName.innerText = newMenuName;
+    }
+  });
+
   // form 태그가 자동으로 전송하는 걸 막아준다.
   $("#espresso-menu-form").addEventListener("submit", (e) => {
     e.preventDefault();
@@ -60,10 +78,6 @@ function App() {
 }
 
 App();
-
-// TODO 메뉴 수정
-// - [ ] 메뉴의 수정 버튼을 누르면 prompt 창이 뜬다.
-// - [ ] prompt 창에서 수정할 메뉴명을 입력 받고, 확인 버튼을 누르면 메뉴가 수정된다.
 
 // TODO 메뉴 삭제
 // - [ ] 메뉴 삭제 버튼을 누르면 confirm 창이 뜬다.
